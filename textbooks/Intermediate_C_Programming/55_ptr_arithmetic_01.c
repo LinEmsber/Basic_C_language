@@ -10,6 +10,7 @@ int main (int argc ,char **argv)
 	double arr_3[] = {3.14, -2.718, 6.626, 0.529};
 
 
+
 	int    *iptr = arr_1;
 	char   *cptr = arr_2;
 	double *dptr = arr_3;
