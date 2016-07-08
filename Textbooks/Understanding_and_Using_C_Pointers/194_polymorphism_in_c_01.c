@@ -29,29 +29,29 @@ typedef struct _shape
 }shape;
 
 
-void shape_display(shape *s)
+void shape_display()
 {
 	printf("shape\n");
 }
 
 void shape_set_x(shape *s, int x)
 {
-	shape -> x = x;
+	s -> x = x;
 }
 
 void shape_set_y(shape *s, int y)
 {
-	shape -> y = y;
+	s -> y = y;
 }
 
 int shape_get_x(shape *s)
 {
-	return shape -> x;
+	return s -> x;
 }
 
 int shape_get_y(shape *s)
 {
-	return shape -> y;
+	return s -> y;
 }
 
 shape * get_shape_entry()
@@ -73,6 +73,7 @@ shape * get_shape_entry()
 
 int main()
 {
+
 	shape *s_ptr = get_shape_entry();
 	s_ptr -> functions.set_x(s_ptr, 35);
 	s_ptr -> functions.display();
