@@ -2,6 +2,8 @@
 
 // Using C to do a implementation of object-oriented language such as C++.
 
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef void (*f_ptr_set) (void *, int );
 typedef int (*f_ptr_get) (void *);
@@ -24,8 +26,8 @@ typedef struct _shape
 	virtual_functions functions;
 
 	// base variables
-	int x;
-	int y;
+	int _x;
+	int _y;
 }shape;
 
 
@@ -36,49 +38,51 @@ void shape_display()
 
 void shape_set_x(shape *s, int x)
 {
-	s -> x = x;
+	s -> _x = x;
 }
 
 void shape_set_y(shape *s, int y)
 {
-	s -> y = y;
+	s -> _y = y;
 }
 
 int shape_get_x(shape *s)
 {
-	return s -> x;
+	return s -> _x;
 }
 
 int shape_get_y(shape *s)
 {
-	return s -> y;
+	return s -> _y;
 }
 
-shape * get_shape_entry()
+shape * get_shape_object()
 {
 	shape *s = (shape *) malloc (sizeof(shape));
 
-	s -> functions.set_x = shape_set_x;
-	s -> functions.set_y = shape_set_y;
-	s -> functions.get_x = shape_get_x;
-	s -> functions.get_y = shape_get_y;
-	s -> functions.display = shape_display;
+	s -> functions.set_x = (f_ptr_set) shape_set_x;
+	s -> functions.set_y = (f_ptr_set) shape_set_y;
+	s -> functions.get_x = (f_ptr_get) shape_get_x;
+	s -> functions.get_y = (f_ptr_get) shape_get_y;
+	s -> functions.display = (f_ptr_display) shape_display;
 
-	s -> x = 100;
-	s -> y = 100;
+	s -> _x = 100;
+	s -> _y = 100;
 
-	return s
+	return s;
 }
 
 
 int main()
 {
 
-	shape *s_ptr = get_shape_entry();
+	shape *s_ptr = get_shape_object();
 	s_ptr -> functions.set_x(s_ptr, 35);
 	s_ptr -> functions.display();
 
 	printf("%d\n", s_ptr -> functions.get_x(s_ptr));
+
+	free(s_ptr);
 
 	return 0;
 }

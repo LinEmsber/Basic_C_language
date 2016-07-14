@@ -133,7 +133,7 @@ int main()
 	s[0] = get_shape_object();
 	s[0] -> functions.set_x(s[0], 35);
 	s[1] = get_rectangle_object();
-	s[1] -> base.functions.set_x(s[1], 45);
+	s[1] -> functions.set_x(s[1], 45);
 	s[2] = get_rectangle_object();
 	s[2] -> functions.set_x(s[2], 55);
 
