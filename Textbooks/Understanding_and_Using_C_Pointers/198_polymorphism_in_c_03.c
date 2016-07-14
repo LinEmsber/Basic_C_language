@@ -3,6 +3,7 @@
 // Using C to do a implementation of object-oriented language such as C++.
 
 
+// function pointer
 typedef void (*f_ptr_set) (void *, int );
 typedef int (*f_ptr_get) (void *);
 typedef void (*f_ptr_display) ();
@@ -17,7 +18,7 @@ typedef struct _functions
 }virtual_functions;
 
 
-
+// =====shape=====
 typedef struct _shape
 {
 	virtual_functions functions;
@@ -27,13 +28,55 @@ typedef struct _shape
 	int y;
 }shape;
 
+void shape_display()
+{
+	printf("shape\n");
+}
+
+void shape_set_x(shape *s, int x)
+{
+	s -> x = x;
+}
+
+void shape_set_y(shape *s, int y)
+{
+	s -> y = y;
+}
+
+int shape_get_x(shape *s)
+{
+	return s -> x;
+}
+
+int shape_get_y(shape *s)
+{
+	return s -> y;
+}
+
+shape * get_shape_object()
+{
+	shape *s = (shape *) malloc (sizeof(shape));
+
+	s -> functions.set_x = shape_set_x;
+	s -> functions.set_y = shape_set_y;
+	s -> functions.get_x = shape_get_x;
+	s -> functions.get_y = shape_get_y;
+	s -> functions.display = shape_display;
+
+	s -> x = 100;
+	s -> y = 100;
+
+	return s;
+}
+// =====shape=====
+
+// =====rectangle=====
 typedef struct _rectangle
 {
 	shape base;
 	int width;
 	int height;
 }rectangle;
-
 
 void rectangle_display()
 {
@@ -78,16 +121,26 @@ rectangle *get_rectangle_object()
 
 	return r;
 }
+// =====rectangle=====
 
 
 int main()
 {
 
-	rectangle *r_ptr = get_rectangle_object();
-	r_ptr -> base.functions.set_x(r_ptr, 35);
-	r_ptr -> base.functions.display();
+	int i ;
+	shpae *s[3];
 
-	printf("%d\n", r_ptr -> base.functions.get_x(r_ptr));
+	s[0] = get_shape_object();
+	s[0] -> functions.set_x(s[0], 35);
+	s[1] = get_rectangle_object();
+	s[1] -> base.functions.set_x(s[1], 45);
+	s[2] = get_rectangle_object();
+	s[2] -> functions.set_x(s[2], 55);
+
+	for (i=0; i<3; i++){
+		s[i] -> functions.display();
+		printf("%d\n", s[i] -> functions.get_x(s[i]) );
+	}
 
 	return 0;
 }
