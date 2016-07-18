@@ -2,6 +2,8 @@
 
 // Using C to do a implementation of object-oriented language such as C++.
 
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef void (*f_ptr_set) (void *, int );
 typedef int (*f_ptr_get) (void *);
@@ -64,10 +66,10 @@ rectangle *get_rectangle_object()
 {
 	rectangle *r = (rectangle *) malloc (sizeof(rectangle));
 
-	r -> base.functions.set_x = rectangle_set_x;
-	r -> base.functions.set_y = rectangle_set_y;
-	r -> base.functions.get_x = rectangle_get_x;
-	r -> base.functions.get_y = rectangle_get_y;
+	r -> base.functions.set_x = (f_ptr_set)rectangle_set_x;
+	r -> base.functions.set_y = (f_ptr_set)rectangle_set_y;
+	r -> base.functions.get_x = (f_ptr_get)rectangle_get_x;
+	r -> base.functions.get_y = (f_ptr_get)rectangle_get_y;
 	r -> base.functions.display = rectangle_display;
 
 	r -> base.x = 100;

@@ -2,6 +2,8 @@
 
 // Using C to do a implementation of object-oriented language such as C++.
 
+#include <stdio.h>
+#include <stdlib.h>
 
 // function pointer
 typedef void (*f_ptr_set) (void *, int );
@@ -15,6 +17,7 @@ typedef struct _functions
 	f_ptr_get get_x;
 	f_ptr_get get_y;
 	f_ptr_display display;
+
 }virtual_functions;
 
 
@@ -53,14 +56,14 @@ int shape_get_y(shape *s)
 	return s -> y;
 }
 
-shape * get_shape_object()
+shape *get_shape_object()
 {
 	shape *s = (shape *) malloc (sizeof(shape));
 
-	s -> functions.set_x = shape_set_x;
-	s -> functions.set_y = shape_set_y;
-	s -> functions.get_x = shape_get_x;
-	s -> functions.get_y = shape_get_y;
+	s -> functions.set_x = (f_ptr_set) shape_set_x;
+	s -> functions.set_y = (f_ptr_set) shape_set_y;
+	s -> functions.get_x = (f_ptr_get) shape_get_x;
+	s -> functions.get_y = (f_ptr_get) shape_get_y;
 	s -> functions.display = shape_display;
 
 	s -> x = 100;
@@ -107,10 +110,10 @@ rectangle *get_rectangle_object()
 {
 	rectangle *r = (rectangle *) malloc (sizeof(rectangle));
 
-	r -> base.functions.set_x = rectangle_set_x;
-	r -> base.functions.set_y = rectangle_set_y;
-	r -> base.functions.get_x = rectangle_get_x;
-	r -> base.functions.get_y = rectangle_get_y;
+	r -> base.functions.set_x = (f_ptr_set) rectangle_set_x;
+	r -> base.functions.set_y = (f_ptr_set) rectangle_set_y;
+	r -> base.functions.get_x = (f_ptr_get) rectangle_get_x;
+	r -> base.functions.get_y = (f_ptr_get) rectangle_get_y;
 	r -> base.functions.display = rectangle_display;
 
 	r -> base.x = 100;
@@ -128,13 +131,13 @@ int main()
 {
 
 	int i ;
-	shpae *s[3];
+	shape *s[3];
 
 	s[0] = get_shape_object();
 	s[0] -> functions.set_x(s[0], 35);
-	s[1] = get_rectangle_object();
+	s[1] = (shape *) get_rectangle_object();
 	s[1] -> functions.set_x(s[1], 45);
-	s[2] = get_rectangle_object();
+	s[2] = (shape *) get_rectangle_object();
 	s[2] -> functions.set_x(s[2], 55);
 
 	for (i=0; i<3; i++){
