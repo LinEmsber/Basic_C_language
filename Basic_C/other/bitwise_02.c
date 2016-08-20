@@ -9,28 +9,29 @@ int main() {
 	unsigned int b = 13;				// 13 = 0000 1101
 	int c = 0;
 
-	// AND						// 12 = 0000 1100
-	c = a & b;
+	// AND
+	c = a & b;					// 12 = 0000 1100
 	printf("Line 1 - Value of c is %d\n", c );
 
-	// OR						// 61 = 0011 1101
-	c = a | b;
+	// OR
+	c = a | b;					// 61 = 0011 1101
 	printf("Line 2 - Value of c is %d\n", c );
 
-	// XOR						// 49 = 0011 0001
-	c = a ^ b;
+	// XOR
+	c = a ^ b;					// 49 = 0011 0001
 	printf("Line 3 - Value of c is %d\n", c );
 
-	// Ones Complement				// -61 = 1100 0011
-	c = ~a;
+	// Ones Complement
+	c = ~a;						// -61 = 1100 0011
 	printf("Line 4 - Value of c is %d\n", c );
 
-	// Left Shift					// 240 = 1111 0000
-	c = a << 2;
+	// Left Shift
+	c = a << 2;					// 240 = 1111 0000
+
 	printf("Line 5 - Value of c is %d\n", c );
 
-	// Right Shift					// 15 = 0000 1111
-	c = a >> 2;
+	// Right Shift
+	c = a >> 2;					// 15 = 0000 1111
 	printf("Line 6 - Value of c is %d\n", c );
 
 	return 0;
