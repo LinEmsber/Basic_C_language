@@ -1,5 +1,4 @@
 #include<stdio.h>
-
 #include "somefile.h"
 
 extern int var;
@@ -9,6 +8,6 @@ int main(){
 }
 
 /*
-	Supposing that somefile.h has the definition of var. This program will be compiled 
+	Supposing that somefile.h has the definition of var. This program will be compiled
 	successfully.
 */
