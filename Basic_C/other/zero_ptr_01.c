@@ -17,12 +17,12 @@ int main()
 {
 	// This will print 0
 	printf("%d\n", &( (struct s*) 0 ) -> c_1 );
-	// This will print 4
+	// This will print 1
 	printf("%d\n", &( (struct s*) 0 ) -> i_1 );
 
-	// This will print 8
+	// This will print 4
 	printf("%d\n", &( (struct s*) 0 ) -> c_2 );
-	// This will print 12
+	// This will print 8
 	printf("%d\n", &( (struct s*) 0 ) -> i_2 );
 
 
