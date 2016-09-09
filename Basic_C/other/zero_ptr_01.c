@@ -5,10 +5,10 @@
 
 struct s
 {
-	char c_1;	// type size: 1
-	char c_2;	// type size: 1
-	int i_1;	// type size: 4
-	int i_2;	// type size: 4
+	char char_1;	// type size: 1
+	char char_2;	// type size: 1
+	int int_1;	// type size: 4
+	int int_2;	// type size: 4
 };
 
 
@@ -16,14 +16,14 @@ struct s
 int main()
 {
 	// This will print 0
-	printf("%d\n", &( (struct s*) 0 ) -> c_1 );
-	// This will print 4
-	printf("%d\n", &( (struct s*) 0 ) -> i_1 );
+	printf("%d\n", &( (struct s*) 0 ) -> char_1 );
+	// This will print 1
+	printf("%d\n", &( (struct s*) 0 ) -> char_2 );
 
+	// This will print 4
+	printf("%d\n", &( (struct s*) 0 ) -> int_1 );
 	// This will print 8
-	printf("%d\n", &( (struct s*) 0 ) -> c_2 );
-	// This will print 12
-	printf("%d\n", &( (struct s*) 0 ) -> i_2 );
+	printf("%d\n", &( (struct s*) 0 ) -> int_2 );
 
 
 	return 0;
