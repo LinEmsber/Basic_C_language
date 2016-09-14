@@ -3,7 +3,8 @@
  * Note: The returned array must be malloced, assume caller calls free().
  */
 
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
+// #define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MIN(x, y) y ^ ( ( x ^ y ) & -( x < y ) )
 
 int* intersection(int* arr_1, int arr_size_1, int* arr_2, int arr_size_2, int* return_size)
 {
