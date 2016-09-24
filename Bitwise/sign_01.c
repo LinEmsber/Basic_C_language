@@ -1,4 +1,4 @@
-/* A effective method to determine integer sign */
+/* A effective method to determine the sign of integer */
 
 // This method can expand to any bit, 8 bit , 64 bit, 128 bit
 
@@ -20,6 +20,6 @@ int main()
         printf("sign(-100) is %d\n", sign(-100) );
         printf("sign(100) is %d\n", sign(100) );
 
-        printf("sign(-100) is %d\n", SIGN(-100) );
-        printf("sign(100) is %d\n", SIGN(100) );
+        printf("SIGN(-100) is %d\n", SIGN(-100) );
+        printf("SIGN(100) is %d\n", SIGN(100) );
 }
