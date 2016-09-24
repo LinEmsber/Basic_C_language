@@ -1,0 +1,25 @@
+/* A effective method to determine integer sign */
+
+// This method can expand to any bit, 8 bit , 64 bit, 128 bit
+
+#include <stdio.h>
+#include <stdint.h>
+
+// function method
+int sign(int32_t a)
+{
+        return 1 ^ ((a >> 31) & 0x1);
+}
+
+// MACRO method
+#define SIGN(a) 1 ^ ((a >> 31) & 0x1)
+
+
+int main()
+{
+        printf("sign(-100) is %d\n", sign(-100) );
+        printf("sign(100) is %d\n", sign(100) );
+
+        printf("sign(-100) is %d\n", SIGN(-100) );
+        printf("sign(100) is %d\n", SIGN(100) );
+}
