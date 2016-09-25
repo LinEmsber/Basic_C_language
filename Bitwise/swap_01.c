@@ -1,4 +1,4 @@
-/* swap */
+/* swap, function method */
 
 #include <stdio.h>
 
