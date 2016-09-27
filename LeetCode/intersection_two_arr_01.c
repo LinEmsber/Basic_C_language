@@ -17,26 +17,33 @@
  */
 int *intersection(int* arr_1, int arr_1_len, int* arr_2, int arr_2_len, int *return_len)
 {
-	int i, j;
-	int len = MIN(arr_1_len, arr_2_len);
+	int i, j;					// iteration
+	int token;					// a token to check the target number is in another array
 
+	int len = MIN(arr_1_len, arr_2_len);
 	int *ret_arr = (int *)malloc( sizeof(int) * len );
 	int ret_arr_index = -1;
 
 	// check each element in arr_1;
 	for( i = 0; i < arr_1_len; i++){
 
-		// check whether the arr_1[i] in array arr_2;
+		// initial token
+		token = 0;
+
+		// check whether the arr_1[i] in array, arr_2;
 		for( j = 0; j < arr_2_len; j++){
+			// printf("j: %d\n", j);
 
 			// find the same integer
-			if(arr_1[i] == arr_2[j])
+			if(arr_1[i] == arr_2[j]){
+				token = 1;
 				break;
+			}
 		}
 
+
 		// save arr_1[i] into return array, ret_arr
-		// ensure that j less than arr_2_len
-		if ( j < arr_2_len ){
+		if ( token == 1 ){
 
 			// avoid duplicate, compare with return array
 			for(j = 0; j <= ret_arr_index; j++){
@@ -51,7 +58,6 @@ int *intersection(int* arr_1, int arr_1_len, int* arr_2, int arr_2_len, int *ret
 				ret_arr[++ret_arr_index] = arr_1[i];
 			}
 		}
-
 	}
 
 	// return len
@@ -81,8 +87,11 @@ int main()
 	int i;
 	int ret_len;
 
-	int a_1[] = {2, 30, 1000, 3, 5, 500, 60, 4, 7};
-	int a_2[] = {21, 3, 7 ,30, 4, 3, 500, 5, 100, 3, 6, 4};
+	int a_1[] = {111, 3, 7 ,30, 4, 3, 500, 5, 100, 3, 6, 4, 7, 500};
+	int a_2[] = {2, 30, 1000, 3, 5, 500, 60, 4, 7};
+
+	// int a_1[] = {111};
+	// int a_2[] = {111};
 
 	int a_1_len = sizeof(a_1) / sizeof( int );
 	int a_2_len = sizeof(a_2) / sizeof( int );
