@@ -16,10 +16,12 @@
 
 int sumOfLeftLeaves(struct TreeNode* root)
 {
-	if (root == NULL){
+	int sum = 0;
+
+	if (root == NULL)
 		return 0;
-	}else{
-		int sum = 0;
+
+	if (root != NULL){
 
 		// check left side first
 		if (root -> left != NULL){
@@ -36,7 +38,7 @@ int sumOfLeftLeaves(struct TreeNode* root)
 		if (root -> right != NULL){
 			sum += sumOfLeftLeaves(root -> right);
 		}
-
-		return sum;
 	}
+
+	return sum;
 }
