@@ -12,7 +12,6 @@
 bool canConstruct(char* ransomNote, char* magazine)
 {
 	int i;
-
 	int table[26] = {0};
 
 	while(*magazine){

@@ -2,16 +2,10 @@
 
 #include <stdio.h>
 
-int add(int a, int b)
-{
-	if (b){
-		return add(a^b, (a&b)<<1 );
+// try to add MACRO version
+// #define ADD(a, b)	(b) ? ADD( a^b, (a&b)<<1 ) : a
 
-	}else{
-		return a;
-	}
 
-}
 
 // if a and b are 2^n, then a + b = a ^ b, and a & b = 0.
 //
@@ -29,6 +23,24 @@ int add(int a, int b)
 // (5 & 9) << 1 = 0001 << 1 = 0010 = 2
 //
 // 1100 ^ 0010 = 1110 = 12 + 2 = 14
+int add(int a, int b)
+{
+	if (b){
+		return add(a^b, (a&b)<<1 );
+	}else{
+		return a;
+	}
+}
+
+
+int negate(int x){
+	return add(~x,1);
+}
+
+int sub(int x,int y){
+	return add(x,negate(y));
+}
+
 
 
 int main()
@@ -37,4 +49,9 @@ int main()
 	printf("add(4, 8): %d\n", add(4, 8) );
 	printf("add(-10, -100): %d\n", add(-10, -100) );
 
+	printf("sub(4, 8): %d\n", sub(4, 8) );
+	printf("sub(-10, -100): %d\n", sub(-10, -100) );
+
+	// printf("add(4, 8): %d\n", ADD(4, 8) );
+	// printf("add(-10, -100): %d\n", ADD(-10, -100) );
 }
