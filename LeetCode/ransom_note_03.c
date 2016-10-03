@@ -15,8 +15,7 @@ bool canConstruct(char* ransomNote, char* magazine)
 	int table[26] = {0};
 
 	while(*magazine){
-		table[*magazine - 'a']++;
-		magazine++;
+		table[*magazine++ - 'a']++;
 	}
 
 	while(*ransomNote) {
@@ -25,10 +24,10 @@ bool canConstruct(char* ransomNote, char* magazine)
 		// if (table[*ransomNote - 'a'] < 0)
 		// 	return false;
 
-		if (--table[*ransomNote - 'a'] < 0)
+		if (--table[*ransomNote++ - 'a'] < 0)
 			return false;
 
-		ransomNote++;
+		// ransomNote++;
 	}
 
 	return true;
