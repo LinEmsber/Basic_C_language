@@ -1,4 +1,4 @@
-/* Ransom Note, 6ms */
+/* Ransom Note, 109ms */
 
 // Given  an arbitrary  ransom  note  string and another string containing letters from  all the magazines, 
 // write a function that will return true if the ransom  note can be constructed from the magazines ;
@@ -9,21 +9,34 @@
 // canConstruct("aa", "aab") -> true
 
 
+int add(int a, int b)
+{
+	if (b){
+		return add(a^b, (a&b)<<1 );
+	}else{
+		return a;
+	}
+}
+
+
+int sub(int x,int y){
+	return add(x, add(~y, 1));
+}
+
 bool canConstruct(char* ransomNote, char* magazine)
 {
 	int i;
 	int table[26] = {0};
 
 	while(*magazine){
-		// table[*magazine - 'a']++;
-		// magazine++;
-		table[*magazine++ - 'a']++;
+		table[sub(*magazine, 'a')]++;
+		magazine++;
+
 	}
 
 	while(*ransomNote) {
-		// table[*ransomNote - 'a']--;
-		// ransomNote++;
-		table[*ransomNote++ - 'a']--;
+		table[sub(*ransomNote, 'a')]--;
+		ransomNote++;
 	}
 
 	for(i = 0; i < 26; i++) {

@@ -12,23 +12,24 @@
 bool canConstruct(char* ransomNote, char* magazine)
 {
 	int i;
+	int token;
 	int table[26] = {0};
 
 	while(*magazine){
-		// table[*magazine - 'a']++;
-		// magazine++;
-		table[*magazine++ - 'a']++;
+		table[*magazine - 'a']++;
+		magazine++;
 	}
 
 	while(*ransomNote) {
-		// table[*ransomNote - 'a']--;
-		// ransomNote++;
-		table[*ransomNote++ - 'a']--;
-	}
 
-	for(i = 0; i < 26; i++) {
-		if(table[i] < 0)
+		// table[*ransomNote - 'a']--;
+		// if (table[*ransomNote - 'a'] < 0)
+		// 	return false;
+
+		if (--table[*ransomNote - 'a'] < 0)
 			return false;
+
+		ransomNote++;
 	}
 
 	return true;
