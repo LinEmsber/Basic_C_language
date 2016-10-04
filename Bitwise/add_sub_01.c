@@ -33,14 +33,32 @@ int add(int a, int b)
 }
 
 
-int negate(int x){
+int add_2(int x,int y)
+{
+	int a, b;
+	do{
+		a = x & y;
+		b = x ^ y;
+		x = a << 1;
+		y = b;
+	}while(a);
+
+	return b;
+}
+
+int negate(int x)
+{
 	return add(~x,1);
 }
 
-int sub(int x,int y){
+int sub(int x,int y)
+{
 	return add(x,negate(y));
 }
 
+int sub_2(int x,int y){
+	return add(x, add(~y, 1));
+}
 
 
 int main()
@@ -52,6 +70,9 @@ int main()
 	printf("sub(4, 8): %d\n", sub(4, 8) );
 	printf("sub(-10, -100): %d\n", sub(-10, -100) );
 
-	// printf("add(4, 8): %d\n", ADD(4, 8) );
-	// printf("add(-10, -100): %d\n", ADD(-10, -100) );
+	printf("add(4, 8): %d\n", add(4, 8) );
+	printf("add(-10, -100): %d\n", add_2(-10, -100) );
+
+	printf("sub(4, 8): %d\n", sub(4, 8) );
+	printf("sub(-10, -100): %d\n", sub_2(-10, -100) );
 }
