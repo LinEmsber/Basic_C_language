@@ -13,7 +13,7 @@ int climbStairs(int n)
 	int n_2 = 0;
 	int ways;
 
-	for(int i=1; i<=n; i++){
+	for( i = 1; i <= n; i++){
 		ways = n_1 + n_2;
 		n_2 = n_1;
 		n_1 = ways;
