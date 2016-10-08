@@ -31,7 +31,7 @@ bool detect_null(unsigned int x)
 // 	−127 		1000 0001
 // 	−128 		1000 0000
 //
-// 
+//
 // Meanwhile, 0x80 equal 128 in decimal, as well as 1000 0000 in binary.
 // Thus, only if X is 0x00, 0- 0x01 & ~(0) & 0x80 != 0
 //
