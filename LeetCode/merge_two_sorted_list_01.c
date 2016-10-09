@@ -3,7 +3,7 @@
  * The new list should be made by splicing together the nodes of the first two lists.
  */
 
-typedef node_t struct node;
+typedef struct node node_t;
 
 struct node
 {
@@ -11,41 +11,50 @@ struct node
 	struct node * next;
 };
 
+
 node_t* merge_list(node_t* l_1, node_t* l_2) {
 
 	if(l_1 == NULL) return l_2;
 	if(l_2 == NULL) return l_1;
 
-	node_t *dummy = (node_t*) malloc (sizeof(node_t));
-	dummy->next = NULL;
+	node_t *tmp = (node_t*) malloc (sizeof(node_t));
+	tmp -> next = NULL;
 
-	node_t *ptr = dummy;
+	node_t *current = tmp;
 
-	while (l_1 != NULL && l_2 != NULL)
-	{
-		if (l_1->val < l_2->val)
-		{
-			ptr->next = l_1;
+	while (l_1 != NULL && l_2 != NULL){
+
+		// If value of l_1 less than value of l_2.
+		if (l_1 -> val < l_2 -> val){
+
+			// The current is spliced by l_1.
+			current -> next = l_1;
+
+			// poll the next node in l_1.
 			l_1 = l_1->next;
-		}
-		else
-		{
-			ptr->next = l_2;
+
+		}else{
+
+			current -> next = l_2;
 			l_2 = l_2->next;
+
 		}
-		ptr = ptr->next;
+
+		current = current -> next;
 	}
 
-	if (l_1 == NULL)
-	{
-		ptr->next = l_2;
-	}
-	else if (l_2 == NULL)
-	{
-		ptr->next = l_1;
+	// If any one of list is polled to the end, splicing the last node of another list into current node.
+	if (l_1 == NULL){
+		current -> next = l_2;
+
+	}else if (l_2 == NULL){
+		current -> next = l_1;
+
 	}
 
-	ptr = dummy->next;
-	free(dummy);
-	return ptr;
+	// splice the last node with NULL.
+	current = tmp->next;
+
+	free(tmp);
+	return current;
 }
