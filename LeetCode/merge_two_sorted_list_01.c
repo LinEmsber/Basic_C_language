@@ -11,7 +11,7 @@ struct node
 	struct node * next;
 };
 
-node_t* merge_lists(node_t* l_1, node_t* l_2) {
+node_t* merge_list(node_t* l_1, node_t* l_2) {
 
 	if(l_1 == NULL) return l_2;
 	if(l_2 == NULL) return l_1;

@@ -17,5 +17,5 @@ node_t * merge_list(node_t* l_1, node_t* l_2)
         if(!l_1) return l_2;
         if(!l_2) return l_1;
 
-        return l_1->val <= l_2->val ? (l_1->next = merge_lists(l_1->next, l_2), l_1) : (l_2->next = merge_lists(l_2->next, l_1), l_2);
+        return l_1->val <= l_2->val ? (l_1->next = merge_list(l_1->next, l_2), l_1) : (l_2->next = merge_list(l_2->next, l_1), l_2);
 }
