@@ -37,7 +37,7 @@ void perm_int( int *list, int start, int end)
 	}else{
 		for (i = start; i <= end; i++){
 
-			// When we use SWAP(a, b) without check a and b whether are the same object, error happen.
+			// When we use SWAP(a, b) without check a and b whether are the same object, the error happen.
 
 			// SWAP( list[start], list[i] );
 			XORSWAP( list[start], list[i] );
