@@ -4,7 +4,25 @@
 
 #include <stdio.h>
 
+// Doesn't work when a and b are the same object - assigns zero (0) to the object in that case
 #define SWAP(a, b)	( (a) ^= (b), (b) ^= (a), (a) ^= (b) )
+
+// checks that the addresses of a and b are different before XOR-ing
+#define XORSWAP(a, b)   ( &(a) == &(b) ) ? (a) : ( (a) ^= (b), (b) ^= (a), (a) ^= (b) )
+
+void swap_int(int *a, int *b)
+{
+	int t = *a;
+	*a = *b;
+	*b = t;
+}
+
+void swap_char(char *a, char *b)
+{
+	char t = *a;
+	*a = *b;
+	*b = t;
+}
 
 
 void perm_int( int *list, int start, int end)
@@ -14,13 +32,20 @@ void perm_int( int *list, int start, int end)
 	if (start == end){
 		for (i = 0; i <= end; i++)
 			printf("%d", list[i]);
-		printf("  ");
+		printf(" \t");
 
 	}else{
 		for (i = start; i <= end; i++){
-			SWAP( list[start], list[i] );
+
+			// When we use SWAP(a, b) without check a and b whether are the same object, error happen.
+
+			// SWAP( list[start], list[i] );
+			XORSWAP( list[start], list[i] );
+
 			perm_int( list, start + 1, end );
-			SWAP( list[start], list[i] );
+
+			// SWAP( list[start], list[i] );
+			XORSWAP( list[start], list[i] );
 		}
 	}
 }
@@ -30,15 +55,13 @@ void perm_char( char *list, int start, int end)
 	int i;
 
 	if (start == end){
-		// for (i = 0; i <= end; i++)
-			printf("%s\n", list);
-		// printf("  ");
+		printf("%s  ", list );
 
 	}else{
 		for (i = start; i <= end; i++){
-			SWAP( *(list + start), *(list + i) );
+			swap_char( (list + start), (list + i) );
 			perm_char( list, start + 1, end );
-			SWAP( *(list + start), *(list + i) );
+			swap_char( (list + start), (list + i) );
 		}
 	}
 }
@@ -46,12 +69,15 @@ void perm_char( char *list, int start, int end)
 
 int main()
 {
-	int int_arr[] = { 2, 3, 4, 5, 1 };
-	char char_arr[] = "abc";
+	int int_arr[] = { 1, 2, 3 };
+	char char_arr[] = "abcd";
 
+	perm_int(int_arr, 0, 2);
+	printf("\n");
 
-	perm_int(int_arr, 0, 4);
-	// perm_char(char_arr, 0, 2);
+	perm_char(char_arr, 0, 2);
+	printf("\n");
+
 
 	return 0;
 }
