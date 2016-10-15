@@ -45,7 +45,7 @@ int main()
 		{6, 7, 8, 9, 10}
 	};
 
-	display_2d_arr_unknown_size( matrix, 2, 5);
+	display_2d_arr_unknown_size( &matrix[0][0], 2, 5);
 
 	return 0;
 }
