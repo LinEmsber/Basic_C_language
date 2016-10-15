@@ -35,6 +35,20 @@ int binary_search(int list[], int search_num, int left, int right)
 		}
 	}
 
+	if ( left <= right ){
+		mid = (left + right ) / 2;
+
+		switch( COMPARE(list[mid], search_num) ){
+
+			case -1:
+				return binary_search(list, search_num, mid + 1, right);
+			case 0:
+				return mid;
+			case 1:
+				return binary_search(list, search_num, mid - 1, left);
+		}
+	}
+
 	return -1;
 }
 
