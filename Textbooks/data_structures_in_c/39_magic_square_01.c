@@ -1,76 +1,79 @@
 /* magic suqre */
 
+
 #include <stdio.h>
-#define MAX_SIZE 15
+#include <string.h>
 
+#define SIDE_LEN 5
 
-// int inital_suqare(int n)
-// {
-// 	int i, j;
-// 	int *square = (int *) malloc ( sizeof(int) * n * n);
-//
-// 	for (i = 0; i < n; i++)
-// 		for (j = 0; j < n; j++)
-// 			*(suqare + (i* n) + j) = 0;
-// }
-//
-//
-// int *magic_square(int n)
-// {
-//
-// }
+int main() {
 
-/* FIXME */
-int main()
-{
-	int i, j;
-	int row, col;
-	int count;
-	int size = 5;
-	int square[MAX_SIZE][MAX_SIZE];
+        int i, j;
+        int row;
+        int col;
+        int next_row;
+        int next_col;
 
-	// initialize square
-	for (i = 0; i < size; i++)
-		for (j = 0; j < size; j++)
-			// *(square + (i * size) + j) = 0;
-			square[i][j] = 0;
+        int magic[99][99];
+        int n = SIDE_LEN;
+        int start = (n / 2); // The middle column
+        int max = n * n; // The final number
 
-	// middle of first row
-	square[0][ (size - 1) / 2 ] = 1;
+        // Initialize
+        memset(magic, 0, sizeof(magic));
+        // Place the number one in the middle of row 0
+	magic[0][start] = 1;
 
-	i = 0;
-	j = (size - 1) / 2;
+	// Loop to start placing numbers in the magic square
+	for (i = 2, row = 0, col = start; i < max + 1; i++) {
 
-	for ( count = 2; count <= size * size; count++){
-
-		// up
-		row = (i - 1 < 0) ? (size - 1) : (i - 1);
-
-		// left
-		// col = (j - 1 < 0) ? (size - 1) : (j - 1);
-		col = (j + 1 > size - 1) ? 0 : (j + 1);
-
-
-		// down
-		if (square[row][col]){
-			i = (++i) % size;
-
-		}else{
-			j = row;
-			j = (j - 1 < 0) ? (size - 1) : --j;
+		// If going up one will leave the top
+		if ((row - 1) < 0) {
+                        // Go to the bottom row
+			next_row = n - 1;
+		} else {
+                        // Otherwise go up one
+			next_row = row - 1;
 		}
+		printf("In row: %d\n", row);
 
-		square[i][j] = count;
+                // If column will leave the side
+		if ((col + 1) > (n - 1)) {
+                        // Wrap to first column
+			next_col = 0;
+			printf("Column will leave side\n");
+		} else {
+                        // Otherwise go over one
+                        next_col = col + 1;
+                }
+		printf("In col: %d\n", col);
+
+                // If that position is taken
+                if (magic[next_row][next_col] > 0) {
+                        // If going to row below leaves bottom
+			if (row > (n - 1)) {
+                                // Go back to the top
+				next_row = 0;
+			}else {
+                                // Go to the row below
+				next_row = row + 1;
+                                // But stay in same column
+				next_col = col;
+			}
+		}
+		row = next_row;
+		col = next_col;
+		printf("About to put %d in row %d, col %d\n", i, row, col);
+                // Put the current value in that position
+		magic[row][col] = i;
 	}
 
-
-	// print out
-	for (i = 0; i < size; i++){
-		for (j = 0; j < size; j++){
-			printf("%5d", square[i][j]);
+	// Now let's print the array
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			printf("%4d", magic[i][j]);
 		}
 		printf("\n");
 	}
-
-
+	return 0;
 }
