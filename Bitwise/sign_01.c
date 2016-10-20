@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdint.h>
 
+// If a > 0 return 1.
+// If a < 0 return 0.
+
 // function method
 int sign(int32_t a)
 {
