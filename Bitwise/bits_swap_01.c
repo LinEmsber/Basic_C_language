@@ -19,7 +19,7 @@
 	(byte & 0x01 ? '1' : '0')
 
 
-void swap_bits(int * n, int bit_pos_1, int bit_pos_2)
+void bits_swap(int * n, int bit_pos_1, int bit_pos_2)
 {
 	unsigned int b1, b2, tmp;
 
@@ -37,7 +37,7 @@ void swap_bits(int * n, int bit_pos_1, int bit_pos_2)
 	*n ^= (int)tmp;
 }
 
-void swap_bits_2( int *x, int p1, int p2, unsigned int n)
+void bits_swap_2( int *x, int p1, int p2, unsigned int n)
 {
 	// Move all bits of first set to rightmost side
 	unsigned int set1 =  (*x >> p1) & ((1U << n) - 1);
@@ -58,13 +58,13 @@ int main()
 	int a = 0b11101011;
 	int b = 0b10111011;
 
-	printf("before swap_bits(&a, 2, 6): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(a));
-	swap_bits(&a, 2, 6);
-	printf("after  swap_bits(&a, 2, 6): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(a));
+	printf("before bits_swap(&a, 2, 6): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(a));
+	bits_swap(&a, 2, 6);
+	printf("after  bits_swap(&a, 2, 6): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(a));
 
-	printf("before swap_bits_2(&b, 2, 5, 2): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(b));
-	swap_bits_2(&b, 2, 5, 2);
-	printf("after  swap_bits_2(&b, 2, 5, 2): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(b));
+	printf("before bits_swap_2(&b, 2, 5, 2): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(b));
+	bits_swap_2(&b, 2, 5, 2);
+	printf("after  bits_swap_2(&b, 2, 5, 2): "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(b));
 
 	return 0;
 }
