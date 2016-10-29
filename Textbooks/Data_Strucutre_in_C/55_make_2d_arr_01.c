@@ -21,6 +21,9 @@ int **make_2d_array(int rows, int cols)
         // get memroy for each row
         for (i = 0; i < rows; i++){
                 MALLOC(x[i], cols * sizeof (**x) );
+
+                // set each of element to zero.
+                *x[i] = 0;
         }
 
         return x;
@@ -33,7 +36,7 @@ int main()
 
         my_arr = make_2d_array(4, 6);
 
-        my_arr[2][3] = 5;
+        // my_arr[2][3] = 5;
 
 
         for (i = 0; i < 4; i++) {
