@@ -9,16 +9,16 @@
 
 int hamming_weight(uint32_t n)
 {
-    int i;
-    int tmp;
-    int count = 0;
+	int i;
+	int tmp;
+	int count = 0;
 
-    for (i = 0; i<32; i++){
-        tmp = n >> i;
-        if ( (tmp & 0x01) == 0x01 ){
-            count++;
-        }
-    }
+	for (i = 0; i<32; i++){
+		tmp = n >> i;
+		if ( (tmp & 0x01) == 0x01 ){
+			count++;
+		}
+	}
 
-    return count;
+	return count;
 }
