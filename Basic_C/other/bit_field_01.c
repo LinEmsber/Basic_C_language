@@ -55,5 +55,9 @@ int main()
 
         printf("sizeof( unsigned int ): %zu\n", sizeof(unsigned int ));
         printf("sizeof( unsigned char ): %zu\n", sizeof(unsigned char ));
-        printf("sizeof( box_props): %zu\n", sizeof(my_box));
+        printf("sizeof( my_box): %zu\n", sizeof(my_box) );
+
+        // bit_field.c:62:50: error: ‘sizeof’ applied to a bit-field
+        //         printf("sizeof( my_box.a): %zu\n", sizeof(my_box.a) ); 
+        printf("sizeof( my_box.a): %zu\n", sizeof(my_box.a) );
 }
