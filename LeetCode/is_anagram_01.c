@@ -1,4 +1,5 @@
-bool isAnagram(char* s, char* t) {
+bool isAnagram(char* s, char* t)
+{
 
 	int i;
 	int a[26] = {0};

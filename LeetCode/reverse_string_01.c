@@ -1,6 +1,7 @@
 /* Reverse String */
 
-char* reverseString(char* s) {
+char* reverseString(char* s)
+{
 
         char *start, *end;
         char tmp;

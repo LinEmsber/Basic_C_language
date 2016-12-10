@@ -20,7 +20,8 @@
 // 	10		14
 //
 
-struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q) {
+struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q)
+{
 
 	// if else method, 24ms
 
