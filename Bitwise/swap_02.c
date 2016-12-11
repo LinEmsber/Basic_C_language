@@ -6,8 +6,8 @@
 #define SWAP(a, b)	( (a) ^= (b), (b) ^= (a), (a) ^= (b) )
 
 // checks that the addresses of a and b are different before XOR-ing
-#define XORSWAP(a, b)   ( &(a) == &(b) ) ? (a) : ( (a) ^= (b), (b) ^= (a), (a) ^= (b) )
-#define XORSWAP_2(a, b)	( ( (a) == (b) ) || ( ( (a) ^= (b) ), ( (b) ^= (a) ), ( (a) ^= (b) ) ) )
+#define XOR_SWAP(a, b)   ( &(a) == &(b) ) ? (a) : ( (a) ^= (b), (b) ^= (a), (a) ^= (b) )
+#define XOR_SWAP_2(a, b)	( ( (a) == (b) ) || ( ( (a) ^= (b) ), ( (b) ^= (a) ), ( (a) ^= (b) ) ) )
 
 int main()
 {
@@ -17,8 +17,8 @@ int main()
 	printf("a: %d, b: %d\n", a, b);
 	SWAP(a, b);
 	printf("a: %d, b: %d\n", a, b);
-	XORSWAP(a, b);
+	XOR_SWAP(a, b);
 	printf("a: %d, b: %d\n", a, b);
-	XORSWAP_2(a, b);
+	XOR_SWAP_2(a, b);
 	printf("a: %d, b: %d\n", a, b);
 }
