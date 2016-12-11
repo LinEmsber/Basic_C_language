@@ -1,3 +1,5 @@
+/* assign cookie */
+
 void swap(int v[], int i, int j)
 {
         int tmp;
