@@ -1,33 +1,26 @@
 /* assign cookie */
 
-void swap(int v[], int i, int j)
-{
-        int tmp;
-        tmp = v[i];
-        v[i] = v[j];
-        v[j] = tmp;
-}
+#define XOR_SWAP_2(a, b)	( ( (a) == (b) ) || ( ( (a) ^= (b) ), ( (b) ^= (a) ), ( (a) ^= (b) ) ) )
 
 void quick_sort( int v[], int left, int right)
 {
-
         int i, last;
 
         if (left >= right)
                 return;
 
-        swap(v, left, (left + right) / 2);
+        XOR_SWAP_2( v[left], v[(left + right) / 2] );
         last = left;
 
-        for (i=left+1; i<=right; i++){
+        for (i = left + 1; i <= right; i++){
 
-                if (v[i]<v[left]){
+                if (v[i] < v[left]){
                     last = last + 1;
-                    swap(v, last, i);
+                    XOR_SWAP_2(v[last], v[i]);
                 }
         }
 
-        swap(v, left, last);
+        XOR_SWAP_2(v[left], v[last]);
         quick_sort(v, left, last-1);
         quick_sort(v, last+1, right);
 
