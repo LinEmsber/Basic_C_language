@@ -11,7 +11,7 @@ void swap(int v[], int i, int j)
 }
 
 
-void qsort( int v[], int left, int right)
+void quick_sort( int v[], int left, int right)
 {
 
 	int i, last;
@@ -35,8 +35,8 @@ void qsort( int v[], int left, int right)
 	}
 
 	swap(v, left, last);
-	qsort(v, left, last-1);
-	qsort(v, last+1, right);
+	quick_sort(v, left, last-1);
+	quick_sort(v, last+1, right);
 
 }
 
@@ -49,17 +49,17 @@ int main()
 
 	// original
 	printf("original a[]: ");
-	for (i=0; i<length_a; i++){
+	for (i = 0; i < length_a; i++){
 		printf("%d  ", a[i]);
 	}
 	printf("\n");
 
 	// start sort
-	qsort(a, 0, length_a-1);
+	quick_sort(a, 0, length_a-1);
 
 	// after sort
 	printf("after sort a[]:");
-	for (i=0; i<length_a; i++){
+	for (i = 0; i < length_a; i++){
 		printf("%d  ", a[i]);
 	}
 	printf("\n");
