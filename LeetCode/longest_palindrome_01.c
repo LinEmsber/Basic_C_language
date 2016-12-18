@@ -38,7 +38,7 @@ int longestPalindrome(char* s)
                         b = true;
                 }
         }
-        
+
         return a + b;
 }
 
@@ -48,9 +48,11 @@ int main()
         char *abb = "abb";
         char *bbca = "bbca";
         char *bbcab = "bbca";
+        char *abccccdd = "abccccdd";
 
         printf("longestPalindrome(bb): %d\n", longestPalindrome(bb));
         printf("longestPalindrome(abb): %d\n", longestPalindrome(abb));
         printf("longestPalindrome(bbca): %d\n", longestPalindrome(bbca));
         printf("longestPalindrome(bbcab): %d\n", longestPalindrome(bbcab));
+        printf("longestPalindrome(abccccdd): %d\n", longestPalindrome(abccccdd));
 }
