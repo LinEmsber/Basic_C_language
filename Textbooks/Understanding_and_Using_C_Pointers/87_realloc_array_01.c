@@ -26,7 +26,7 @@ char *get_line(void)
 		// next line
 		if (c == '\n'){
 			break;
-		}4
+		}
 
 		if ( ++len >= len){
 
