@@ -6,10 +6,9 @@ void traverse(struct TreeNode *root, int depth, int ***arr, int **columnSizes, i
         if (*returnSize < depth + 1) {
                 *returnSize = depth + 1;
 
-                // Should initialize the one more allocated space to NULL (or 0)
                 // void *realloc(void *ptr, size_t size);
-                If the new size is larger than the old size, the added memory will not be initialized.
-                // allocate *arr
+                // If the new size is larger than the old size, the added memory will not be initialized.
+                // allocate memory of one pointer size for *arr, and initialize it.
                 *arr = realloc(*arr, (depth + 1) * sizeof(int *));
                 (*arr)[depth] = NULL;
 
@@ -27,9 +26,10 @@ void traverse(struct TreeNode *root, int depth, int ***arr, int **columnSizes, i
 
 int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize)
 {
-        //
+        // pointer to pointer array for saving the result.
         int **arr;
 
+        // initialize
         arr = NULL;
         *returnSize = 0;
 
