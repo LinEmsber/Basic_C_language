@@ -12,116 +12,116 @@ char buf[BUFFSIZE];  // buffer for ungetch
 int bufp = 0;        // next free posotion in buf
 
 struct key {
-    char *word;
-    int count;
+        char *word;
+        int count;
 };
 
 struct key keytab[] =  {
-    "auto", 0,
-    "break", 0,
-    "case", 0,
-    "char", 0,
-    "continue", 0,
-    "unsigned", 0,
-    "void", 0,
-    "volatile", 0,
-    "while", 0
+        "auto", 0,
+        "break", 0,
+        "case", 0,
+        "char", 0,
+        "continue", 0,
+        "unsigned", 0,
+        "void", 0,
+        "volatile", 0,
+        "while", 0
 };
 
 // get a (possibly pushed back) character
 int getch(void) {
-    return (bufp > 0) ? buf[--bufp] : getchar();
+        return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
 // push back on input
 void ungetch(int c) {
-    if (bufp >= BUFFSIZE)
-        printf("ungetch: too many characters\n");
-    else buf[bufp++] = c;
+        if (bufp >= BUFFSIZE)
+                printf("ungetch: too many characters\n");
+        else buf[bufp++] = c;
 }
 
 int acceptable(char c) {
-    return  ((c == '_') || (c == '"') || (c == '#') || (c == '/') || isalnum(c));
+        return  ((c == '_') || (c == '"') || (c == '#') || (c == '/') || isalnum(c));
 }
-
-
-int acceptable(char);
-int getword(char *, int);
-int binsearch(char *, struct key *, int);
 
 }
 
 // getword: get next word or character from input
-int getword(char *word, int lim){
+int getword(char *word, int lim)
+{
 
-    int c;
-    char *w = word;
+        int c;
+        char *w = word;
 
-    while ( isspace( c = getch() ) ){
-        printf("%d\n", c);
-    }
-
-    if (c != EOF)
-        *w++ = c;
-
-    if (!acceptable(c)) {
-        *w = '\0';
-        return c;
-    }
-
-    for ( ; --lim > 0; w++){
-
-        if (!acceptable(*w = getch())){
-            ungetch(*w);
-            break;
+        while ( isspace( c = getch() ) ){
+                printf("%d\n", c);
         }
-    }
-    *w = '\0';
-    return word[0];
+
+        if (c != EOF)
+                *w++ = c;
+
+        if (!acceptable(c)) {
+                *w = '\0';
+                return c;
+        }
+
+        for ( ; --lim > 0; w++){
+
+                if (!acceptable(*w = getch())){
+                        ungetch(*w);
+                        break;
+                }
+        }
+
+        *w = '\0';
+        return word[0];
 }
 
-// binsearch: find word in tab[0]... tab[n-1]
-int binsearch(char *word, struct key tab[], int n){
-    int cond;
-    int low, high, mid;
+// binary_search: find word in tab[0]... tab[n-1]
+int binary_search(char *word, struct key tab[], int n)
+{
+        int cond;
+        int low, high, mid;
 
-    low = 0;
-    high = n - 1;
-    while (low <= high) {
+        low = 0;
+        high = n - 1;
 
-        mid = (low + high) / 2;
+        while (low <= high) {
 
-        if ((cond = strcmp(word, tab[mid].word)) < 0){
-            high = mid - 1;
+                mid = (low + high) / 2;
 
-        } else if (cond > 0){
-            low = mid + 1;
+                if ( (cond = strcmp( word, tab[mid].word) ) < 0 ){
+                        high = mid - 1;
 
-        } else {
+                } else if (cond > 0){
+                        low = mid + 1;
 
-            return mid;
+                } else {
+
+                        return mid;
+                }
         }
-    }
-    return -1;
+        return -1;
+}
 
-// count C keywords
-int main(void) {
 
-    int n;
-    char word[MAXWORD];
+int main(void)
+{
+        int n;
+        char word[MAXWORD];
 
-    while(getword(word, MAXWORD) != EOF){
-        if (isalpha(word[0])){
-            if ((n = binsearch(word, keytab, NKEYS)) >= 0){
-                keytab[n].count++;
-            }
+        while(getword(word, MAXWORD) != EOF){
+                if ( isalpha(word[0]) ){
+                        if ( ( n = binary_search(word, keytab, NKEYS) ) >= 0 ){
+                                keytab[n].count++;
+                        }
+                }
         }
-    }
 
-    for (n = 0; n < NKEYS; n++){
-        if (keytab[n].count > 0){
-            printf("%4d %s\n", keytab[n].count, keytab[n].word);
+        for (n = 0; n < NKEYS; n++){
+                if ( keytab[n].count > 0 ){
+                        printf("%4d %s\n", keytab[n].count, keytab[n].word);
+                }
         }
-    }
-    return 0;
+        return 0;
 }
