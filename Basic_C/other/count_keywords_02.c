@@ -29,22 +29,25 @@ struct key keytab[] =  {
 };
 
 // get a (possibly pushed back) character
-int getch(void) {
+int getch(void)
+{
         return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
 // push back on input
-void ungetch(int c) {
+void ungetch(int c)
+{
         if (bufp >= BUFFSIZE)
                 printf("ungetch: too many characters\n");
         else buf[bufp++] = c;
 }
 
-int acceptable(char c) {
+int acceptable(char c)
+{
         return  ((c == '_') || (c == '"') || (c == '#') || (c == '/') || isalnum(c));
 }
 
-}
+
 
 // getword: get next word or character from input
 int getword(char *word, int lim)

@@ -110,7 +110,7 @@ int main(void)
 	int n;
 	char word[MAXWORD];
 
-	while( getword[(word, MAXWORD) != EOF ){
+	while( getword(word, MAXWORD) != EOF ){
 		if (isalpha(word[0])){
 		if ( ( n = binary_search(word, keytab, NKEYS) ) >= 0 ){
 			keytab[n].count++;
