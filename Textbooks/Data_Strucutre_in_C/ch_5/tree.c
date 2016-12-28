@@ -1,5 +1,6 @@
 /* tree.c */
 
+#include <stdlib.h>
 #include "tree.h"
 
 
@@ -134,4 +135,49 @@ void tree_remove(tree_t *tree)
 int tree_count(tree_t *tree)
 {
 	return tree -> count;
+}
+
+// ======== insert node ========
+
+/* insert a node into a node
+ *
+ * @node: the node to be inserted node
+ * @value: the value of inserted node
+ */
+node_t *node_insert_node( node_t *node, int value)
+{
+	if (node == NULL){
+		node_t *node = node_create();
+		node_init(node);
+		node_input_value(node, value);
+		return node;
+
+	}else{
+		int compare_ret = compare_value(node->value, value);
+
+		// If node -> value > input_value, turn left.
+		if (compare_ret == -1 ){
+			node -> left = node_insert_node(node->left, value);
+
+			// If node -> value < input_value, turn right.
+			// It the input_value has already contained in the tree, and put it in the right side.
+		}else if (compare_ret == 1 || compare_ret == 0){
+			node -> right = node_insert_node(node->right, value);
+
+		}
+		return node;
+	}
+}
+
+/* insert a node into a tree
+ *
+ * @tree: the tree to be inserted node
+ * @value: the value of inserted node
+ */
+tree_t *tree_insert_node( tree_t *tree, int value)
+{
+	tree -> root = node_insert_node(tree->root, value);
+	(tree -> count) ++;
+
+	return tree;
 }
