@@ -1,11 +1,11 @@
 /* inorder traversal */
 
-// gcc 207_inorder_01.c tree.c
+// gcc 208_preorder_01.c tree.c
 
 #include <stdio.h>
 #include "tree.h"
 
-void node_inorder(node_t *root)
+void node_preorder(node_t *root)
 {
 
         if (root){
