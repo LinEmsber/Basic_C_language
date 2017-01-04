@@ -13,53 +13,45 @@ int node_level(node_t* node)
 		return 0;
 	}else{
 		// compute the height of each subtree
-		int lheight = node_level(node->left);
-		int rheight = node_level(node->right);
+		int l_height = node_level(node->left);
+		int r_height = node_level(node->right);
 
 		// use the larger one
-		if (lheight > rheight){
-			return lheight + 1;
+		if (l_height > r_height){
+			return l_height + 1;
 		}else{
-			return rheight + 1;
+			return r_height + 1;
 		}
 	}
 }
 
-// ==================breadth first search==================
 // Print nodes at a given level.
-int print_given_level(node_t* root, int level)
+int print_node_given_level(node_t* root, int level)
 {
 	// check node is exist or not
 	if (root == NULL){
 		return 0;
 	}
 
-	// // find the children nodes in recursive way.
-	// if (level == 1){
-	// 	printf("%d ", root->value);
-	// }else if (level > 1){
-	// 	print_given_level(root->left, level-1);
-	// 	print_given_level(root->right, level-1);
-	// }
-
 	// find the children nodes in recursive way.
-	if (level > 1){
-		print_given_level(root->left, level-1);
-		print_given_level(root->right, level-1);
-	}else if (level == 1){
+	if (level == 1){
 		printf("%d ", root->value);
+	}else if (level > 1){
+		print_node_given_level(root->left, level-1);
+		print_node_given_level(root->right, level-1);
 	}
+
 	return 1;
 }
 
-/* Function to line by line print level order traversal a tree*/
-void print_level_order(node_t* root)
+// function to line by line print level order traversal a tree
+void print_node_level_order(node_t* root)
 {
 	int i;
 	int h = node_level(root);
 
-	for (i=1; i<=h; i++){
-		print_given_level(root, i);
+	for (i = 1; i <= h; i++){
+		print_node_given_level(root, i);
 		printf("\n");
 	}
 }
@@ -72,20 +64,16 @@ int main()
         tree_t *t = tree_create();
         tree_init(t);
 
-        tree_insert_node(t, 'A');
-        tree_insert_node(t, 'B');
-        tree_insert_node(t, 'D');
-        tree_insert_node(t, '*');
-        tree_insert_node(t, '*');
-        tree_insert_node(t, '/');
-        tree_insert_node(t, '+');
-        tree_insert_node(t, 'C');
-        tree_insert_node(t, 'E');
+        tree_insert_node(t, 30);
+        tree_insert_node(t, 25);
+        tree_insert_node(t, 15);
+        tree_insert_node(t, 20);
+        tree_insert_node(t, 45);
+        tree_insert_node(t, 50);
+        tree_insert_node(t, 60);
+        tree_insert_node(t, 55);
+        tree_insert_node(t, 10);
 
-	height = node_level(t -> root);
-
-        printf( "node_height(t -> root): %d\n", height );
-
-        print_level_order(t -> root);
+        print_node_level_order(t -> root);
 
 }
