@@ -101,7 +101,7 @@ void dequeue(queue_t **queue)
 	*queue = q;
 }
 
-void print_node_order_level_itervate(node_t * node)
+void print_node_order_level_itertive(node_t * node)
 {
 
 	queue_t *q =  NULL;
@@ -138,7 +138,7 @@ int main()
 	tree_insert_node(t, 55);
 	tree_insert_node(t, 10);
 
-	print_node_order_level_itervate(t -> root);
+	print_node_order_level_itertive(t -> root);
 	printf("\n");
 
 }
