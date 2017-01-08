@@ -85,6 +85,7 @@ void dequeue(queue_t **queue)
 	*queue = q;
 }
 
+// print tree in order level in tertive method which is with queue.
 void print_node_order_level_itertive(node_t * node)
 {
 
@@ -97,12 +98,13 @@ void print_node_order_level_itertive(node_t * node)
 
 		printf("%d ", current_node->value);
 
+                dequeue(&q);
+
+                // input the children into queue
 		if(current_node->left)
 			enqueue(&q, current_node->left);
 		if(current_node->right)
 			enqueue(&q, current_node->right);
-
-		dequeue(&q);
 	}
 }
 
