@@ -1,102 +1,86 @@
-/* inorder traversal */
+/* inorder traversal in iterative method and use queue */
 
-// gcc 211_level_order_01.c tree.c
+// gcc 211_level_order_02.c tree.c
 
 #include <stdio.h>
 #include "tree.h"
 
+// A structure, queue, for saving node.
+typedef struct queue queue_t;
 
 struct queue{
 	node_t *element;
 	struct queue *next;
 };
-typedef struct queue queue_t;
 
-// Compute the level(height) of a tree, the number of nodes along the longest path
-// from the root node down to the farthest leaf node.
-int node_level(node_t* node)
-{
-	if (node == NULL){
-		return 0;
-	}else{
-		// compute the height of each subtree
-		int l_height = node_level(node->left);
-		int r_height = node_level(node->right);
-
-		// use the larger one
-		if (l_height > r_height){
-			return l_height + 1;
-		}else{
-			return r_height + 1;
-		}
-	}
-}
-
-// Print nodes at a given level.
-int print_node_given_level(node_t* root, int level)
-{
-	// check node is exist or not
-	if (root == NULL){
-		return 0;
-	}
-
-	// find the children nodes in recursive way.
-	if (level == 1){
-		printf("%d ", root->value);
-	}else if (level > 1){
-		print_node_given_level(root->left, level-1);
-		print_node_given_level(root->right, level-1);
-	}
-
-	return 1;
-}
-
-
+/* enqueue
+ *
+ * @queue: the target queue which we want to input nodes into it.
+ * @node: the target node
+ */
 void enqueue(queue_t **queue, node_t *node)
 {
 	queue_t *q  = NULL;
 	queue_t *head  = *queue;
 
-	if(!(*queue)){
-		q =(queue_t *)malloc(sizeof(queue_t));
-		q->element = node;
-		q->next = NULL;
+        // check the queue is exist or not.
+	if( !(*queue) ){
+		q = (queue_t *) malloc( sizeof(queue_t) );
+		q -> element = node;
+		q -> next = NULL;
 		*queue = q;
-	}
-	else{
+
+        // if the queue is exist, we add the new node behind its last node.
+	}else{
 		q = *queue;
+
+                // move to the queue's last node
 		while(q->next)
 			q = q->next;
 
-		queue_t *currentNode =(queue_t *)malloc(sizeof(queue_t));
-		q->next = currentNode;
-		currentNode->element = node;
-		currentNode->next = NULL;
+		queue_t *current_node = (queue_t *) malloc( sizeof(queue_t) );
+		q->next = current_node;
+		current_node -> element = node;
+		current_node -> next = NULL;
 		*queue = head;
 	}
 }
 
-int is_empty( queue_t *q)
+/* check the queue is exist or not
+ *
+ * @queue: the target queue
+ */
+int is_empty( queue_t *queue )
 {
-	if(!q) return 1;
+	if( !queue )
+                return 1;
 
 	return 0;
 }
 
+/* obtain the queue's first node
+ *
+ * @queue: the target queue
+ */
 node_t *front(queue_t *queue)
 {
 	if(queue)
 		return queue->element;
 }
 
+/* remove the queue's first node
+ *
+ * @queue: the target queue
+ */
 void dequeue(queue_t **queue)
 {
 	queue_t *q = *queue;
+	queue_t *node_to_delete = q;
 
-	queue_t *nodeToDelete = q;
-	q = nodeToDelete->next;
-	nodeToDelete = NULL;
-	free(nodeToDelete);
+	q = node_to_delete->next;
+	node_to_delete = NULL;
+
+	free(node_to_delete);
 
 	*queue = q;
 }
@@ -107,15 +91,16 @@ void print_node_order_level_itertive(node_t * node)
 	queue_t *q =  NULL;
 	enqueue(&q, node);
 
-	while(!is_empty(q)){
-		node_t *currentNode = front(q);
+	while( !is_empty(q) ){
 
-		printf("%d ", currentNode->value);
+		node_t *current_node = front(q);
 
-		if(currentNode->left)
-			enqueue(&q, currentNode->left);
-		if(currentNode->right)
-			enqueue(&q, currentNode->right);
+		printf("%d ", current_node->value);
+
+		if(current_node->left)
+			enqueue(&q, current_node->left);
+		if(current_node->right)
+			enqueue(&q, current_node->right);
 
 		dequeue(&q);
 	}
