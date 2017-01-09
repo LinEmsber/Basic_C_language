@@ -113,7 +113,7 @@ int main()
 	// print out the result
 	l_node_t * h = l -> head;
 	for (h ; h != NULL; h = h -> next){
-		printf("%d ", ( (struct node*) (int) h ) -> value);
+		printf("%d ", ( (node_t *) (h -> data) ) -> value );
 	}
 	printf("\n");
 
