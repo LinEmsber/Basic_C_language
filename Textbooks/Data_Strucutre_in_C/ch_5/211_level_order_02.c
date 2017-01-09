@@ -1,4 +1,4 @@
-/* inorder traversal in iterative method and use queue */
+/* level order traversal in iterative method and use queue */
 
 // gcc 211_level_order_02.c tree.c
 

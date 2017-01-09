@@ -1,4 +1,4 @@
-/* inorder traversal */
+/* level order traversal */
 
 // gcc 211_level_order_01.c tree.c
 
