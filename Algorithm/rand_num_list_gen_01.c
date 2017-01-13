@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 /* generate a random number list in a specific range
@@ -18,6 +19,7 @@ int * rn_list_gen( int len , int start, int end)
 
         // memroy allocation
         ret_arr = (int *) malloc( len * sizeof(int) );
+        memset(ret_arr, 0, len + 1);
 
         // rand seed use time
         srand( (unsigned) time(NULL) );
@@ -38,7 +40,7 @@ int * rn_list_gen( int len , int start, int end)
 void print_list(int *list, int len)
 {
         int i;
-        
+
         for ( i = 0; i < len; i++){
                 printf("%d ", *(list + i) );
         }
