@@ -19,7 +19,7 @@ struct l_node{
 typedef struct list list_t;
 struct list{
 	l_node_t * head;
-	int count;
+	int length;
 };
 
 // ===== operations =====
@@ -38,7 +38,7 @@ l_node_t * l_node_create( void * data)
 void list_init(list_t *list)
 {
 	list -> head = NULL;
-	list -> count = 0;
+	list -> length = 0;
 }
 
 // To create a linked list.
@@ -52,14 +52,24 @@ list_t * list_create()
 // Insert a node into a list
 list_t * list_insert_data( list_t * list, void * data)
 {
+	// set a current node to search the last node in the list
+	l_node_t * tmp;
+	l_node_t * current = list -> head;
 	l_node_t * n = l_node_create(data);
 
-	l_node_t * tmp  = list -> head;
+	if ( current == NULL )
+		list -> head = n;
+	else{
+		while ( current != NULL){
+			tmp = current;
+			current = current -> next;
+		}
 
-	list -> head = n;
-	n -> next = tmp;
+		tmp -> next = n;
+		tmp -> next -> next = NULL;
+	}
 
-	list -> count++;
+	list -> length++;
 
 	return list;
 }
@@ -86,6 +96,58 @@ void node_order_level_to_list( list_t *l, node_t * root)
 
 }
 
+// Compute the level(height) of a tree, the number of nodes along the longest path
+// from the root node down to the farthest leaf node.
+int node_level(node_t* node)
+{
+	if (node == NULL){
+		return 0;
+	}else{
+		// compute the height of each subtree
+		int l_height = node_level(node->left);
+		int r_height = node_level(node->right);
+
+		// use the larger one
+		if (l_height > r_height){
+			return l_height + 1;
+		}else{
+			return r_height + 1;
+		}
+	}
+}
+
+// Print nodes at a given level.
+int print_node_given_level(list_t * list, node_t* root, int level)
+{
+	// check node is exist or not
+	if (root == NULL){
+		return 0;
+	}
+
+	// find the children nodes in recursive way.
+	if (level == 1){
+		printf("%d ", root->value);
+		list_insert_data(list, root);
+	}else if (level > 1){
+		print_node_given_level(list, root->left, level-1);
+		print_node_given_level(list, root->right, level-1);
+	}
+
+	return 1;
+}
+
+// function to line by line print level order traversal a tree
+void print_node_level_order(list_t* list, node_t* root)
+{
+	int i;
+	int h = node_level(root);
+
+	for (i = 1; i <= h; i++){
+		print_node_given_level(list, root, i);
+		printf("\n");
+	}
+}
+
 int main()
 {
 	// create a linked list
@@ -108,7 +170,7 @@ int main()
 	tree_insert_node(t, 10);
 
 	// transfer a tree into list
-	node_order_level_to_list( l, t -> root);
+	print_node_level_order( l, t -> root);
 
 	// print out the result
 	l_node_t * h = l -> head;
