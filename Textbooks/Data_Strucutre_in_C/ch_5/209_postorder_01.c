@@ -9,9 +9,9 @@ void node_postorder(node_t *root)
 {
 
         if (root){
-                node_inorder(root -> left);
-                node_inorder(root -> right);
-                printf("%c ", root -> value);
+                node_postorder(root -> left);
+                node_postorder(root -> right);
+                printf("%d ", root -> value);
         }
 }
 
@@ -20,17 +20,16 @@ int main()
         tree_t *t = tree_create();
         tree_init(t);
 
-        tree_insert_node(t, 'A');
-        tree_insert_node(t, 'B');
-        tree_insert_node(t, 'D');
-        tree_insert_node(t, '*');
-        tree_insert_node(t, '*');
-        tree_insert_node(t, '/');
-        tree_insert_node(t, '+');
-        tree_insert_node(t, 'C');
-        tree_insert_node(t, 'E');
+        tree_insert_node(t, 30);
+	tree_insert_node(t, 25);
+	tree_insert_node(t, 15);
+	tree_insert_node(t, 20);
+	tree_insert_node(t, 45);
+	tree_insert_node(t, 50);
+	tree_insert_node(t, 60);
+	tree_insert_node(t, 55);
+	tree_insert_node(t, 10);
 
-        node_inorder(t -> root);
-
-
+        node_postorder(t -> root);
+        printf("\n");
 }
