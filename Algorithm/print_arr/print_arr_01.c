@@ -1,6 +1,6 @@
-/* Using rand() to generate a random integer number list */
+/* Using rand() to generate a random integer number array */
 
-// > gcc -Wall print_list_01.c
+// > gcc -Wall print_arr_01.c
 // > ./a.out 10
 
 #include <stdio.h>
@@ -8,13 +8,13 @@
 #include <string.h>
 #include <time.h>
 
-/* generate a random number list in a specific range
+/* generate a random number array in a specific range
  *
- * @len: the length of list
- * @start: the start number of list
- * @end: the end number of list
+ * @len: the length of array
+ * @start: the start number of array
+ * @end: the end number of array
  */
-int * rn_list_gen( int len , int start, int end)
+int * rn_arr_gen( int len , int start, int end)
 {
         int i;
         int * ret_arr = NULL;
@@ -27,7 +27,7 @@ int * rn_list_gen( int len , int start, int end)
         // rand seed use time
         srand( (unsigned) time(NULL) );
 
-        // generate list
+        // generate arr
         for ( i = 0; i < len; i++ ){
                 *(ret_arr + i) = (rand() % range) + 1;
         }
@@ -35,26 +35,26 @@ int * rn_list_gen( int len , int start, int end)
         return ret_arr;
 }
 
-/* print the list with specific lenght
+/* print the array with specific lenght
  *
- * @list: the target list
- * @len: the length of list
+ * @arr: the target array
+ * @len: the length of array
  */
-void print_list_1(int *list, int len)
+void print_arr_1(int *arr, int len)
 {
         int i;
 
         for ( i = 0; i < len; i++){
-                printf("%d ", *(list + i) );
+                printf("%d ", *(arr + i) );
         }
         printf("\n");
 }
 
-void print_list_2(int *list, int len)
+void print_arr_2(int *arr, int len)
 {
-        int * ptr = list;
+        int * ptr = arr;
 
-        while( ptr != (list + len) ){
+        while( ptr != (arr + len) ){
                 printf("%d ",  *(ptr++) );
         }
 
@@ -63,10 +63,10 @@ void print_list_2(int *list, int len)
 
 int main( int argc, char *argv[] )
 {
-        int * arr = rn_list_gen( atoi(argv[1]), 10, 100 );
+        int * arr = rn_arr_gen( atoi(argv[1]), 10, 100 );
 
-        print_list_1( arr, atoi(argv[1]) );
-        print_list_2( arr, atoi(argv[1]) );
+        print_arr_1( arr, atoi(argv[1]) );
+        print_arr_2( arr, atoi(argv[1]) );
 
         return 0;
 }
