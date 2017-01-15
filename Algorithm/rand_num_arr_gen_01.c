@@ -32,6 +32,17 @@ int * rn_arr_gen( int len , int start, int end)
         return ret_arr;
 }
 
+/* a safe free function
+ */
+void _safe_free(void **pp)
+{
+	if (pp != NULL && *pp != NULL){
+		free(*pp);
+		*pp = NULL;
+	}
+}
+#define safe_free(p) _safe_free( (void**) &p )
+
 /* print the array with specific lenght
  *
  * @arr: the target array
@@ -52,6 +63,8 @@ int main( int argc, char *argv[] )
         int * arr = rn_arr_gen( atoi(argv[1]), 10, 100 );
 
         print_arr( arr, atoi(argv[1]) );
+
+        safe_free(arr);
 
         return 0;
 }
